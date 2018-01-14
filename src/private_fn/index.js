@@ -1,5 +1,7 @@
 "use strict";
 
+const FormData = require("form-data");
+const querystring = require("querystring");
 const _ = require("lodash");
 const moment = require("moment");
 const crypto = require("crypto");
@@ -12,40 +14,47 @@ const generateNonce = () => {
   return timeNumber + 10;
 };
 
-const generateSignHeader = (secretKey, params = {}) => {
-  return crypto
+const generateSignHeader = (secretKey, params = {}) =>
+  crypto
     .createHmac("sha512", secretKey)
-    .update(new Buffer(params))
+    .update(new Buffer(querystring.stringify(params)))
     .digest("hex")
     .toString();
-};
 
 const fetchData = (Request, secretKey, method, payload = {}) => {
-  const params = {
+  const data = {
     method,
     nonce: generateNonce()
   };
 
-  if (Object.keys(payload).length > 0) {
-    Object.assign(params, payload);
+  if (Object.keys(payload).length > 0) Object.assign(data, payload);
+
+  const signKey = generateSignHeader(secretKey, data);
+
+  const formData = new FormData();
+  for (const [key, val] of Object.entries(data)) {
+    formData.append(key, val);
   }
 
-  const signKey = generateSignHeader(secretKey, params);
-  return Request.post("/", params, {
-    headers: {
-      Sign: signKey
-    }
+  const headers = {
+    Sign: signKey
+  };
+
+  Object.assign(headers, formData.getHeaders());
+
+  return Request.post("/", formData, {
+    headers
   });
 };
 
 const AVAILABLE_FUNCTIONS = {
-  showInfo(secretKey, Request) {
+  showInfo(Request, secretKey) {
     return () => fetchData(Request, secretKey, "getInfo");
   },
-  transactionHistory(secretKey, Request) {
+  transactionHistory(Request, secretKey) {
     return () => fetchData(Request, secretKey, "transHistory");
   },
-  trade(secretKey, Request) {
+  trade(Request, secretKey) {
     return (pair, type, price) => {
       const payload = {
         pair,
@@ -59,7 +68,7 @@ const AVAILABLE_FUNCTIONS = {
       return fetchData(Request, secretKey, "trade", payload);
     };
   },
-  tradeBitcoin(secretKey, Request) {
+  tradeBitcoin(Request, secretKey) {
     return (pair, type, price, btcIdrPrice) => {
       const payload = {
         pair,
@@ -73,7 +82,7 @@ const AVAILABLE_FUNCTIONS = {
       return fetchData(Request, secretKey, "trade", payload);
     };
   },
-  tradeHistory(secretKey, Request) {
+  tradeHistory(Request, secretKey) {
     return (pair, start = null, end = null, payload = {}) => {
       const defaultPayload = {
         pair,
@@ -103,7 +112,7 @@ const AVAILABLE_FUNCTIONS = {
       return fetchData(Request, secretKey, "tradeHistory", defaultPayload);
     };
   },
-  showOpenOrders(secretKey, Request) {
+  showOpenOrders(Request, secretKey) {
     return (pair = null) => {
       const payload = {};
 
@@ -112,21 +121,21 @@ const AVAILABLE_FUNCTIONS = {
       return fetchData(Request, secretKey, "openOrders", payload);
     };
   },
-  showOrderHistory(secretKey, Request) {
+  showOrderHistory(Request, secretKey) {
     return (pair, startIdx = 0, count = 1000) =>
       fetchData(Request, secretKey, "orderHistory", {
         from: startIdx,
         count
       });
   },
-  getOrder(secretKey, Request) {
+  getOrder(Request, secretKey) {
     return (pair, orderId) =>
       fetchData(Request, secretKey, "orderHistory", {
         pair,
         order_id: orderId
       });
   },
-  cancelOrder(secretKey, Request) {
+  cancelOrder(Request, secretKey) {
     return (pair, orderId, type) =>
       fetchData(Request, secretKey, "orderHistory", {
         pair,
@@ -139,8 +148,8 @@ const AVAILABLE_FUNCTIONS = {
 const getFunctions = (request, secretKey) => {
   const fns = {};
 
-  for (const [key, fn] of AVAILABLE_FUNCTIONS) {
-    fns[key] = curry(fn)(request, secretKey);
+  for (const [key, fn] of Object.entries(AVAILABLE_FUNCTIONS)) {
+    fns[key] = _.curry(fn)(request, secretKey);
   }
 
   return fns;

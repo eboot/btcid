@@ -30,6 +30,7 @@ const btid = (apiKey = null, secretKey = null) => {
         Key: apiKey
       }
     });
+
     const publicFns = privateFunction(requestPvt, secretKey);
     Object.assign(fns, publicFns);
   }
