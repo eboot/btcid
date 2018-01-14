@@ -6,18 +6,27 @@ const trades = require("./trades");
 const depth = require("./depth");
 
 const AVAILABLE_EXCHANGES = [
-  { fn: "bitCoin", key: "btc_idr" },
-  { fn: "bitCoinCash", key: "bch_idr" },
-  { fn: "bitCoinGold", key: "btg_idr" },
-  { fn: "ethereum", key: "eth_idr" },
-  { fn: "ethereumClassic", key: "etc_idr" },
-  { fn: "ignis", key: "ignis_idr" },
-  { fn: "liteCoin", key: "ltc_idr" },
-  { fn: "nxt", key: "nxt_idr" },
-  { fn: "waves", key: "waves_idr" },
-  { fn: "ripple", key: "xrp_idr" },
-  { fn: "zCoin", key: "xzc_idr" },
-  { fn: "stellarLumen", key: "str_idr" }
+  { fn: "bitCoinIdr", key: "btc_idr" },
+  { fn: "bitCoinCashIdr", key: "bch_idr" },
+  { fn: "bitCoinGoldIdr", key: "btg_idr" },
+  { fn: "ethereumIdr", key: "eth_idr" },
+  { fn: "ethereumClassicIdr", key: "etc_idr" },
+  { fn: "ignisIdr", key: "ignis_idr" },
+  { fn: "liteCoinIdr", key: "ltc_idr" },
+  { fn: "nxtIdr", key: "nxt_idr" },
+  { fn: "wavesIdr", key: "waves_idr" },
+  { fn: "rippleIdr", key: "xrp_idr" },
+  { fn: "zCoinIdr", key: "xzc_idr" },
+  { fn: "stellarLumenIdr", key: "str_idr" },
+  { fn: "bitSharesBtc", key: "bts_btc" },
+  { fn: "dashBtc", key: "drk_btc" },
+  { fn: "dogeBtc", key: "doge_btc" },
+  { fn: "ethereumBtc", key: "eth_btc" },
+  { fn: "liteCoinBtc", key: "ltc_btc" },
+  { fn: "nxtBtc", key: "nxt_btc" },
+  { fn: "stellarLumenBtc", key: "str_btc" },
+  { fn: "nemBtc", key: "nem_btc" },
+  { fn: "rippleBtc", key: "xrp_btc" }
 ];
 
 const getFunctions = request => {
