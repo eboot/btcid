@@ -1,6 +1,6 @@
 # BTCId
 
-This is a simple node.js library to request data from [bitcoin.co.id](http://bitcoin.co.id). You are required to register as a member on bitcoin.co.id and get the **API Key** and **Secret Key** in order to use the private API.
+This is a simple implementation on Node.js library to request data from [bitcoin.co.id](http://bitcoin.co.id). You are required to register as a member on bitcoin.co.id and get the **API Key** and **Secret Key** in order to use this especially the private API.
 
 ## REQUIREMENTS
 
