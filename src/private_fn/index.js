@@ -62,9 +62,6 @@ const AVAILABLE_FUNCTIONS = {
         price
       };
 
-      if (idr !== null) Object.assign(payload, { idr });
-      if (btc !== null) Object.assign(payload, { btc });
-
       return fetchData(Request, secretKey, "trade", payload);
     };
   },
