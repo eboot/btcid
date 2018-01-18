@@ -111,15 +111,15 @@ Please check your **Trade API permission** on bitcoin.co.id, if some of permissi
 
 ### private function
 
-| Function Name      | API Methods (API Docs) | Parameter                                         | Example                                                                                                                       |
-| ------------------ | ---------------------- | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| showInfo           | getInfo                | None                                              | btcInst.showInfo().then(res => console.log(res.data))                                                                         |
-| transactionHistory | transHistory           | None                                              | btcInst.transactionHistory().then(res => console.log(res.data))                                                               |
-| tradeHistory       | tradeHistory           | `pair name`, `start date`, `end date`, `config`   | btcInst.tradeHistory('str_btc', '2017-12-12', '2018-01-01', {count: 1000}).then(res => console.log(JSON.stringify(res.data))) |
-| showOpenOrders     | openOrders             | `pair name` or None (all pairs)                   | btcInst.showOpenOrders().then(res => console.log(JSON.stringify(res.data)))                                                   |
-| showOrderHistory   | orderHistory           | `pair name` or None (all pairs)                   | btcInst.showOrderHistory().then(res => console.log(JSON.stringify(res.data)))                                                 |
-| getOrder           | getOrder               | `pair name`, `order id`                           | btcInst.getOrder('str_idr', 4630225).then(res => console.log(JSON.stringify(res.data)))                                       |
-| cancelOrder        | cancelOrder            | `pair name`, `order id`, `type` (`buy` or `sell`) | btcInst.cancelOrder('str_idr', 18, 'buy').then(res => console.log(JSON.stringify(res.data)))                                  |
+| Function Name      | API Methods (API Docs) | Parameter                                         | Example                                                                                                                         |
+| ------------------ | ---------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| showInfo           | getInfo                | None                                              | `btcInst.showInfo().then(res => console.log(res.data))`                                                                         |
+| transactionHistory | transHistory           | None                                              | `btcInst.transactionHistory().then(res => console.log(res.data))`                                                               |
+| tradeHistory       | tradeHistory           | `pair name`, `start date`, `end date`, `config`   | `btcInst.tradeHistory('str_btc', '2017-12-12', '2018-01-01', {count: 1000}).then(res => console.log(JSON.stringify(res.data)))` |
+| showOpenOrders     | openOrders             | `pair name` or None (all pairs)                   | `btcInst.showOpenOrders().then(res => console.log(JSON.stringify(res.data)))`                                                   |
+| showOrderHistory   | orderHistory           | `pair name` or None (all pairs)                   | `btcInst.showOrderHistory().then(res => console.log(JSON.stringify(res.data)))`                                                 |
+| getOrder           | getOrder               | `pair name`, `order id`                           | `btcInst.getOrder('str_idr', 4630225).then(res => console.log(JSON.stringify(res.data)))`                                       |
+| cancelOrder        | cancelOrder            | `pair name`, `order id`, `type` (`buy` or `sell`) | `btcInst.cancelOrder('str_idr', 18, 'buy').then(res => console.log(JSON.stringify(res.data)))`                                  |
 
 ## LICENSE
 
