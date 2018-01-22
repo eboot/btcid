@@ -1,5 +1,5 @@
 {
-  "name": "btcid",
+  "name": "@slaveofcode/btcid",
   "version": "1.0.0",
   "description": "Simple api wrapper library for bitcoin.co.id",
   "main": "./src/index.js",
