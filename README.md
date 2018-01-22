@@ -8,7 +8,7 @@ This is a simple implementation on Node.js library to request data from [bitcoin
 
 ## INSTALLATION
 
-    npm i btcid --save
+    npm i @slaveofcode/btcid --save
 
 ## HOW TO USE
 
