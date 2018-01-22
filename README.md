@@ -120,6 +120,9 @@ Please check your **Trade API permission** on bitcoin.co.id, if some of permissi
 | showOrderHistory   | orderHistory           | `pair name` or None (all pairs)                   | `btcInst.showOrderHistory().then(res => console.log(JSON.stringify(res.data)))`                                                 |
 | getOrder           | getOrder               | `pair name`, `order id`                           | `btcInst.getOrder('str_idr', 4630225).then(res => console.log(JSON.stringify(res.data)))`                                       |
 | cancelOrder        | cancelOrder            | `pair name`, `order id`, `type` (`buy` or `sell`) | `btcInst.cancelOrder('str_idr', 18, 'buy').then(res => console.log(JSON.stringify(res.data)))`                                  |
+| trade              | trade                  | `pair name`, `type` (`buy` or `sell`), `price`    | `btcInst.trade('str_idr', 'buy', 7200).then(res => console.log(JSON.stringify(res.data)))`                                      |
+
+Moreover you could see the source of these function at `src/private_fn/index.js`. Go ahead and open an issue if you found a bug.
 
 ## LICENSE
 
