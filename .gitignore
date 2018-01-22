@@ -59,3 +59,5 @@ typings/
 
 # custom ignore files
 api.txt
+
+.vscode
